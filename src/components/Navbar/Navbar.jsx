@@ -65,9 +65,9 @@ const Navbar = () => {
 
     return (
         // <nav className=" px-4 py-3 shadow-md">
-        <nav className={`fixed top-0 w-full z-10 px-4 py-3 transition-colors duration-300 ${navbarBackground ? "bg-white shadow-lg" : "bg-white lg:bg-transparent"
+        <nav className={`fixed top-0 w-full z-10 py-1 transition-colors duration-300 ${navbarBackground ? "bg-white shadow-lg" : "bg-transparent"
             }`}>
-            <div className="container mx-auto px-4 flex justify-between items-center">
+            <div className="container mx-auto px-8 pt-4 flex justify-between items-center">
                 {/* Logo */}
                 <Link className="flex items-center gap-1">
                     <img className="w-10 sm:w-16" src={logo} alt="MicroBucks Logo" />
@@ -82,10 +82,10 @@ const Navbar = () => {
 
                     {/* Menubar */}
                     <button
-                        // className=" md:hidden"
+                        className={`${navbarBackground ? "text-black" : "text-white"}`}
                         onClick={() => setIsOpen(!isOpen)}
                     >
-                        {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+                        {isOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
                     </button>
                 </div>
 
@@ -101,10 +101,10 @@ const Navbar = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={isOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`mobile-menu lg:hidden overflow-hidden px-4 pb-1`}
+                className={`mobile-menu lg:hidden overflow-hidden px-6 pb-4 bg-white`}
             >
                 <ul
-                    className="space-y-2 mt-3"
+                    className="space-y-4 mt-3 text-lg"
                     onClick={() => setIsOpen(false)}
                 >
                     {navLinks}

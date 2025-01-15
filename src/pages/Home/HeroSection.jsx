@@ -32,7 +32,7 @@ const HeroSection = () => {
     ];
 
     return (
-        <section className="relative w-full h-[600px]">
+        <section className="relative w-full h-[600px] sm:h-[750px]">
             <Swiper
                 style={{
                     '--swiper-navigation-color': '#fff',
