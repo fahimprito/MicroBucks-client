@@ -65,7 +65,7 @@ const Navbar = () => {
 
     return (
         // <nav className=" px-4 py-3 shadow-md">
-        <nav className={`sticky top-0 w-full z-10 px-4 py-3 transition-colors duration-300 ${navbarBackground ? "bg-white shadow-lg" : "bg-white lg:bg-transparent"
+        <nav className={`fixed top-0 w-full z-10 px-4 py-3 transition-colors duration-300 ${navbarBackground ? "bg-white shadow-lg" : "bg-white lg:bg-transparent"
             }`}>
             <div className="container mx-auto px-4 flex justify-between items-center">
                 {/* Logo */}
