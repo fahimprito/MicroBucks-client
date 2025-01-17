@@ -2,7 +2,7 @@
 
 const Register = () => {
     return (
-        <div>
+        <div className="border-2 mt-20 sm:mt-24">
             Register
         </div>
     );

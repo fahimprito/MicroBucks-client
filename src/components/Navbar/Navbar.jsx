@@ -82,7 +82,7 @@ const Navbar = () => {
 
                     {/* Menubar */}
                     <button
-                        className={`${navbarBackground ? "text-black" : "text-white"}`}
+                        className={`${homeLocation ? `${navbarBackground ? "text-black" : "text-white"}` : ""}`}
                         onClick={() => setIsOpen(!isOpen)}
                     >
                         {isOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
