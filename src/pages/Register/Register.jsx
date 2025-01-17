@@ -23,7 +23,7 @@ const Register = () => {
 
             <div className="max-md:px-4">
                 <div className="md:w-5/6 md:mx-auto px-6 border rounded-xl py-8 bg-base-200">
-                    <h2 className="text-3xl font-semibold mb-4 text-center">Sign up</h2>
+                    <h2 className="text-3xl font-semibold mb-4 text-center">Register</h2>
                     <div className="divider"></div>
 
                     <form onSubmit={handleRegister}>

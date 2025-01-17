@@ -3,11 +3,14 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion } from "motion/react"
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../assets/microbucks_logo.png"
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [navbarBackground, setNavbarBackground] = useState(false);
     const location = useLocation();
+    const authData = useAuth();
+    const { user } = authData;
 
     const homeLocation = location.pathname === '/';
 
@@ -44,6 +47,14 @@ const Navbar = () => {
                     className={({ isActive }) => (isActive ? "font-bold text-primary" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
                 >
                     Join as Developer
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/join-as-developer"
+                    className={({ isActive }) => (isActive ? "font-bold text-primary" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
+                >
+                    {user?.name}
                 </NavLink>
             </li>
             <li>
