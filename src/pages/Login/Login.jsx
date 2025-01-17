@@ -76,7 +76,7 @@ const Login = () => {
                     </form>
 
                     <p className="text-center mt-4">Do not have an account? <Link
-                        className="text-primary font-semibold link-hover" to="/signup">
+                        className="text-primary font-semibold link-hover" to="/register">
                         Create an account
                     </Link></p>
                     <div className="divider">OR</div>
