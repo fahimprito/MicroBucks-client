@@ -12,7 +12,7 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile, loginWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const onSubmit = data => {
@@ -45,7 +45,20 @@ const Register = () => {
     }
 
     const handleGoogleSignIn = () => {
-        // will implement letter 
+        loginWithGoogle()
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Registered Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/');
+            })
+            .catch(error => {
+                setError(error.message)
+            })
+
     }
 
     return (

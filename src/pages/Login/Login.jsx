@@ -9,7 +9,7 @@ import AuthContext from "../../contexts/AuthContext";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
-    const { loginUser } = useContext(AuthContext);
+    const { loginUser, loginWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -32,7 +32,13 @@ const Login = () => {
     }
 
     const handleGoogleSignIn = () => {
-
+        loginWithGoogle()
+            .then(() => {
+                navigate(location.state ? location.state : '/');
+            })
+            .catch(error => {
+                setError(error.message)
+            })
     }
 
     return (
