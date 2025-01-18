@@ -1,16 +1,33 @@
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/lottie/loginLottie.json"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import AuthContext from "../../contexts/AuthContext";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
+    const { loginUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogin = e => {
         e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        // console.log({ email, password });
+
+        loginUser(email, password)
+            .then(() => {
+                e.target.reset();
+                navigate(location.state ? location.state : '/');
+            })
+            .catch(err => {
+                setError(err.message);
+            })
 
     }
 
@@ -34,10 +51,10 @@ const Login = () => {
 
                     <form onSubmit={handleLogin}>
                         <div className="form-control mt-4">
-                            <input 
-                            type="email" name="email" placeholder="Enter your email" 
-                            className="input input-bordered rounded-md bg-base-100" 
-                            required />
+                            <input
+                                type="email" name="email" placeholder="Enter your email"
+                                className="input input-bordered rounded-md bg-base-100"
+                                required />
                         </div>
                         <div className="form-control mt-4 relative">
                             <input

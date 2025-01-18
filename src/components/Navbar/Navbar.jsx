@@ -10,7 +10,7 @@ const Navbar = () => {
     const [navbarBackground, setNavbarBackground] = useState(false);
     const location = useLocation();
     const authData = useAuth();
-    const { user } = authData;
+    const { user, logOutUser } = authData;
 
     const homeLocation = location.pathname === '/';
 
@@ -49,28 +49,51 @@ const Navbar = () => {
                     Join as Developer
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to="/join-as-developer"
-                    className={({ isActive }) => (isActive ? "font-bold text-primary" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
-                >
-                    {user?.name}
-                </NavLink>
-            </li>
-            <li>
-                <Link
-                    to="/login"
-                    className="btn max-sm:btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-lg px-5 border-none">
-                    Login
-                </Link>
-            </li>
-            <li>
-                <Link
-                    to="/register"
-                    className="btn max-sm:btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-lg px-5 border-none">
-                    Register
-                </Link>
-            </li>
+
+            {
+                user ? (
+                    <>
+                        <li className="hidden lg:flex">
+                            {
+                                user && <div className="relative group">
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar border mt-1">
+                                        <img src={user.photoURL} alt="User Icon" className="rounded-full" />
+                                    </label>
+                                    <span
+                                        className="absolute top-14 right-0 bg-white text-black px-3 py-1 rounded shadow-md text-sm hidden group-hover:block whitespace-nowrap z-10">
+                                        {user.displayName}
+                                    </span>
+                                </div>
+                            }
+
+                        </li>
+                        <li>
+                            <button
+                                onClick={logOutUser}
+                                className="btn max-sm:btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-lg px-5 border-none">
+                                Logout
+                            </button>
+                        </li>
+                    </>
+                ) : (
+                    <>
+                        <li>
+                            <Link
+                                to="/login"
+                                className="btn max-sm:btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-lg px-5 border-none">
+                                Login
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/register"
+                                className="btn max-sm:btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-lg px-5 border-none">
+                                Register
+                            </Link>
+                        </li>
+                    </>
+                )
+            }
         </>
     );
 

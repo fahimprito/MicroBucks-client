@@ -1,17 +1,46 @@
 import Lottie from "lottie-react";
 import registerAnimation from "../../assets/lottie/register.json"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import AuthContext from "../../contexts/AuthContext";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const onSubmit = data => {
         console.log(data);
+        const { name, email, photoURL, password } = data;
+
+        // create user
+        createUser(email, password)
+            .then(() => {
+                // reset();
+                updateUserProfile({ displayName: name, photoURL: photoURL })
+                    .then(() => {
+                        navigate('/');
+                    })
+                    .catch((err) => {
+                        setError(err.message);
+                    });
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Registered Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+            .catch(err => {
+                setError(err.message);
+            })
         reset();
     }
 
@@ -91,6 +120,12 @@ const Register = () => {
                             </button>
                             {errors.password && <span className="text-red-600 ml-2">{errors.password.message}</span>}
                         </div>
+
+                        {error && (
+                            <label className="label text-sm text-red-600">
+                                {error}
+                            </label>
+                        )}
 
                         <div className="form-control mt-8">
                             <button className="btn bg-primary hover:bg-[#0d775dd7] text-white text-lg rounded-md">
