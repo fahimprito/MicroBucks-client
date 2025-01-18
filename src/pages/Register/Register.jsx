@@ -4,18 +4,19 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState('');
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const handleRegister = e => {
-        e.preventDefault();
-
+    const onSubmit = data => {
+        console.log(data);
+        reset();
     }
 
     const handleGoogleSignIn = () => {
-
+        // will implement letter 
     }
 
     return (
@@ -26,49 +27,70 @@ const Register = () => {
                     <h2 className="text-3xl font-semibold mb-4 text-center">Register</h2>
                     <div className="divider"></div>
 
-                    <form onSubmit={handleRegister}>
-                    <div className="form-control mt-4">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className="form-control mt-4">
                             <select
-                                defaultValue="role"
-                                className="select select-bordered w-full text-base">
-                                <option value={'role'} disabled>Select User role</option>
-                                <option value={'worker'}>Worker</option>
-                                <option value={'buyer'}>Buyer</option>
+                                defaultValue=""
+                                {...register("role", { required: true })}
+                                className="select select-bordered w-full text-base"
+                            >
+                                <option value="" disabled>Select User Role</option>
+                                <option value="worker">Worker</option>
+                                <option value="buyer">Buyer</option>
                             </select>
+                            {errors.role && <span className="text-red-600 ml-2">Please select a role</span>}
                         </div>
+
+
                         <div className="form-control mt-4">
                             <input type="text" name="name" placeholder="Enter your name"
-                                className="input input-bordered rounded-md bg-base-100"
-                                required />
+                                {...register("name", { required: true })}
+                                className="input input-bordered rounded-md bg-base-100" />
+                            {errors.name && <span className="text-red-600 ml-2">Name is required</span>}
                         </div>
                         <div className="form-control mt-4">
-                            <input type="text" name="photo" placeholder="Photo URL"
-                                className="input input-bordered rounded-md bg-base-100" required />
+                            <input type="text" name="photoURL" placeholder="Photo URL"
+                                {...register("photoURL", { required: true })}
+                                className="input input-bordered rounded-md bg-base-100" />
+                            {errors.photoURL && <span className="text-red-600 ml-2">Photo URL is required</span>}
                         </div>
                         <div className="form-control mt-4">
                             <input type="email" name="email" placeholder="Enter your email address"
-                                className="input input-bordered rounded-md bg-base-100" required />
+                                {...register("email", { required: true })}
+                                className="input input-bordered rounded-md bg-base-100" />
+                            {errors.email && <span className="text-red-600 ml-2">Email is required</span>}
                         </div>
+                        {/* Password */}
                         <div className="form-control mt-4 relative">
                             <input
                                 type={showPassword ? "text" : "password"}
-                                name="password"
+                                {...register("password", {
+                                    required: "Password is required",
+                                    minLength: {
+                                        value: 6,
+                                        message: "Password must be at least 6 characters",
+                                    },
+                                    maxLength: {
+                                        value: 20,
+                                        message: "Password must be less than 20 characters",
+                                    },
+                                    pattern: {
+                                        value: /(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])/,
+                                        message: "Password must include uppercase, lowercase, and a number",
+                                    },
+                                })}
                                 placeholder="Enter your password"
                                 className="input input-bordered rounded-md bg-base-100"
-                                required />
+                            />
                             <button
                                 onClick={() => setShowPassword(!showPassword)}
                                 type="button"
-                                className="btn btn-xs bg-transparent border-none hover:bg-transparent text-base absolute right-2 top-3 ">
+                                className="btn btn-xs bg-transparent border-none hover:bg-transparent text-base absolute right-2 top-3 "
+                            >
                                 {showPassword ? <FaEye /> : <FaEyeSlash />}
                             </button>
+                            {errors.password && <span className="text-red-600 ml-2">{errors.password.message}</span>}
                         </div>
-
-                        {error && (
-                            <label className="label text-sm text-red-600">
-                                {error}
-                            </label>
-                        )}
 
                         <div className="form-control mt-8">
                             <button className="btn bg-primary hover:bg-[#0d775dd7] text-white text-lg rounded-md">
