@@ -41,14 +41,21 @@ const Navbar = () => {
                     Home
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to="/join-as-developer"
-                    className={({ isActive }) => (isActive ? "font-bold text-primary" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
-                >
-                    Join as Developer
-                </NavLink>
-            </li>
+
+            {
+                user && (
+                    <>
+                        <li>
+                            <NavLink
+                                to="/dashboard"
+                                className={({ isActive }) => (isActive ? "font-bold text-primary" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
+                            >
+                                Dashboard
+                            </NavLink>
+                        </li>
+                    </>
+                )
+            }
 
             {
                 user ? (
@@ -70,7 +77,7 @@ const Navbar = () => {
                         <li>
                             <button
                                 onClick={logOutUser}
-                                className="btn max-sm:btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-lg px-5 border-none">
+                                className="btn btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-base px-5 border-none">
                                 Logout
                             </button>
                         </li>
@@ -80,28 +87,34 @@ const Navbar = () => {
                         <li>
                             <Link
                                 to="/login"
-                                className="btn max-sm:btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-lg px-5 border-none">
+                                className="btn btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-base px-5 border-none">
                                 Login
                             </Link>
                         </li>
                         <li>
                             <Link
                                 to="/register"
-                                className="btn max-sm:btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-lg px-5 border-none">
+                                className="btn btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-base px-5 border-none">
                                 Register
                             </Link>
                         </li>
                     </>
                 )
             }
+            <li
+                onClick={() => window.open("https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-fahimprito", "_blank")}
+                className="btn btn-sm bg-accent hover:bg-[#d1c190] text-gray-800 text-base px-4 rounded-lg shadow-md border-none"
+            >
+                Join as Developer
+            </li>
+
         </>
     );
 
     return (
-        // <nav className=" px-4 py-3 shadow-md">
         <nav className={`fixed top-0 w-full z-10 py-1 transition-colors duration-300 ${navbarBackground ? "bg-white shadow-lg" : "bg-transparent"
             }`}>
-            <div className="container mx-auto px-8 pt-4 flex justify-between items-center">
+            <div className="container mx-auto px-8 py-4 sm:py-2 flex justify-between items-center">
                 {/* Logo */}
                 <Link className="flex items-center gap-1">
                     <img className="w-10 sm:w-16" src={logo} alt="MicroBucks Logo" />
@@ -112,7 +125,17 @@ const Navbar = () => {
 
                 <div className="lg:hidden flex items-center gap-4">
                     {/* user icon  */}
-
+                    {
+                        user && <div className="relative group">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar border mt-1">
+                                <img src={user.photoURL} alt="User Icon" className="rounded-full" />
+                            </label>
+                            <span
+                                className="absolute top-14 right-0 bg-white text-black px-3 py-1 rounded shadow-md text-sm hidden group-hover:block whitespace-nowrap z-10">
+                                {user.displayName}
+                            </span>
+                        </div>
+                    }
 
                     {/* Menubar */}
                     <button
@@ -125,7 +148,7 @@ const Navbar = () => {
 
 
                 {/* Desktop Links */}
-                <ul className="hidden lg:flex space-x-6 text-lg items-center font-medium">
+                <ul className="hidden lg:flex space-x-6 text-base items-center font-medium">
                     {navLinks}
                 </ul>
             </div>
@@ -135,10 +158,10 @@ const Navbar = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={isOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`mobile-menu lg:hidden overflow-hidden px-6 pb-4 bg-white`}
+                className={`mobile-menu lg:hidden overflow-hidden px-8 bg-white`}
             >
                 <ul
-                    className="space-y-4 mt-3 text-lg"
+                    className="space-y-4 my-7 text-lg"
                     onClick={() => setIsOpen(false)}
                 >
                     {navLinks}
