@@ -1,9 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import aboutBg from "../../assets/banner/slide5.jpg";
 
 const About = () => {
     return (
         <div className="mt-20 sm:mt-[88px] min-h-screen">
-            
+            <Helmet>
+                <title>MicroBucks | About</title>
+            </Helmet>
             <div
                 className="bg-cover bg-center h-[300px] lg:h-[400px] flex items-center justify-center"
                 style={{
@@ -22,7 +25,7 @@ const About = () => {
 
             <div className="bg-gray-50 py-10 lg:py-16 px-6 lg:px-16">
                 <div className="max-w-4xl mx-auto space-y-8">
-                    
+
                     <section>
                         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                             Our Mission

@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import AuthContext from "../../contexts/AuthContext";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const axiosPublic = useAxiosPublic();
@@ -56,7 +57,10 @@ const Login = () => {
 
     return (
         <div className="max-w-7xl mx-auto py-20 grid md:grid-cols-2 mt-20 sm:mt-[88px]">
-
+            <Helmet>
+                <title>MicroBucks | Login</title>
+            </Helmet>
+            
             <div className="max-md:hidden">
                 <div className="mx-auto w-10/12">
                     <Lottie animationData={loginAnimation} loop={true} />
