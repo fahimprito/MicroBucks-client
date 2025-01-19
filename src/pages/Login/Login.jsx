@@ -42,7 +42,7 @@ const Login = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto py-20 grid md:grid-cols-2 mt-20 sm:mt-[88px] border-2">
+        <div className="max-w-7xl mx-auto py-20 grid md:grid-cols-2 mt-20 sm:mt-[88px]">
 
             <div className="max-md:hidden">
                 <div className="mx-auto w-10/12">

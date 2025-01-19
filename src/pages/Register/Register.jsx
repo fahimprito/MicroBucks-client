@@ -7,8 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import AuthContext from "../../contexts/AuthContext";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic();
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -16,7 +18,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
         const { name, email, photoURL, password } = data;
 
         // create user
@@ -25,23 +27,36 @@ const Register = () => {
                 // reset();
                 updateUserProfile({ displayName: name, photoURL: photoURL })
                     .then(() => {
-                        navigate('/');
+                        // create user entry in the database
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
+                            role: data.role,
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to the database')
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Registered successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/');
+                                }
+                            })
                     })
                     .catch((err) => {
                         setError(err.message);
                     });
-
-                Swal.fire({
-                    icon: "success",
-                    title: "Registered Successfully",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
             })
             .catch(err => {
                 setError(err.message);
             })
-        reset();
+
     }
 
     const handleGoogleSignIn = () => {
@@ -62,7 +77,7 @@ const Register = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto py-20 grid md:grid-cols-2 border-2 mt-20 sm:mt-[88px]">
+        <div className="max-w-7xl mx-auto py-20 grid md:grid-cols-2 mt-20 sm:mt-[88px]">
 
             <div className="max-md:px-4">
                 <div className="md:w-5/6 md:mx-auto px-6 border rounded-xl py-8 bg-base-200">
