@@ -61,14 +61,18 @@ const Register = () => {
 
     const handleGoogleSignIn = () => {
         loginWithGoogle()
-            .then(() => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Registered Successfully",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate('/');
+            .then(result => {
+                console.log(result.user);
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName,
+                    role: "worker",
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        navigate('/');
+                    })
             })
             .catch(error => {
                 setError(error.message)

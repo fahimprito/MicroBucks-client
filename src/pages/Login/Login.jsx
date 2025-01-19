@@ -5,8 +5,10 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import AuthContext from "../../contexts/AuthContext";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
+    const axiosPublic = useAxiosPublic();
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const { loginUser, loginWithGoogle } = useContext(AuthContext);
@@ -33,8 +35,18 @@ const Login = () => {
 
     const handleGoogleSignIn = () => {
         loginWithGoogle()
-            .then(() => {
-                navigate(location.state ? location.state : '/');
+            .then(result => {
+                console.log(result.user);
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName,
+                    role: "worker",
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        navigate(location.state ? location.state : '/');
+                    })
             })
             .catch(error => {
                 setError(error.message)
