@@ -32,6 +32,7 @@ const Register = () => {
                             name: data.name,
                             email: data.email,
                             role: data.role,
+                            coins: data.role === "worker" ? 10 : 50,
                         }
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
@@ -67,6 +68,7 @@ const Register = () => {
                     email: result.user?.email,
                     name: result.user?.displayName,
                     role: "worker",
+                    coins: 10,
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {

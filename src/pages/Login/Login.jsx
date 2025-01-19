@@ -41,6 +41,7 @@ const Login = () => {
                     email: result.user?.email,
                     name: result.user?.displayName,
                     role: "worker",
+                    coins: 10,
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
