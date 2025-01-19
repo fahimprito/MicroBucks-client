@@ -56,7 +56,7 @@ const Footer = () => {
                     <nav className="md:mx-auto mt-5">
                         <h6 className="footer-title text-lg text-black font-bold mb-3">Support</h6>
                         <a className="link link-hover hover:text-primary">Blog</a>
-                        <a className="link link-hover hover:text-primary">About us</a>
+                        <Link to={'/about'} onClick={() => window.scrollTo(0, 0)} className="link link-hover hover:text-primary">About us</Link>
                         <a className="link link-hover hover:text-primary">Terms & Condition</a>
                         <a className="link link-hover hover:text-primary">Privacy Policy</a>
                     </nav>

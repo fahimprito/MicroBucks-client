@@ -41,6 +41,14 @@ const Navbar = () => {
                     Home
                 </NavLink>
             </li>
+            <li>
+                <NavLink
+                    to="/about"
+                    className={({ isActive }) => (isActive ? "font-bold text-primary" : `${homeLocation ? `${navbarBackground ? "text-black" : "lg:text-white"}` : ""}`)}
+                >
+                    About
+                </NavLink>
+            </li>
 
             {
                 user && (

@@ -62,7 +62,7 @@ const Register = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto py-20 grid md:grid-cols-2 border-2 mt-20 sm:mt-24">
+        <div className="max-w-7xl mx-auto py-20 grid md:grid-cols-2 border-2 mt-20 sm:mt-[88px]">
 
             <div className="max-md:px-4">
                 <div className="md:w-5/6 md:mx-auto px-6 border rounded-xl py-8 bg-base-200">
