@@ -2,7 +2,7 @@
 
 const ManageTask = () => {
     return (
-        <div>
+        <div className="min-h-[50vh]">
             ManageTask
         </div>
     );

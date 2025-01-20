@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../pages/Dashboard/Sidebar/Sidebar";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaBars, FaCoins } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
+import Footer from "../components/Footer/Footer";
+import AuthContext from "../contexts/AuthContext";
 
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { user } = useContext(AuthContext);
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -56,7 +59,7 @@ const Dashboard = () => {
                             {/* Name */}
                             <div>
                                 <p className="text-sm lg:text-base font-medium">
-                                    <span className="font-bold">John Doe</span>{" "}
+                                    <span className="font-bold">{user.displayName}</span>{" "}
                                     <span className="text-gray-200">(Worker)</span>
                                 </p>
                             </div>
@@ -65,7 +68,7 @@ const Dashboard = () => {
                         {/* User img */}
                         <div className="flex items-center gap-4">
                             <img
-                                src=""
+                                src={user.photoURL}
                                 alt="User Profile"
                                 className="w-10 h-10 rounded-full border-2 border-white"
                             />
@@ -85,6 +88,7 @@ const Dashboard = () => {
                 {/* Main Content Area */}
                 <main className="p-4 lg:p-8">
                     <Outlet />
+                    <Footer></Footer>
                 </main>
             </div>
         </div>
