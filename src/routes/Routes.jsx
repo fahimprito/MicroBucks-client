@@ -8,6 +8,7 @@ import Dashboard from "../layouts/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import About from "../pages/About/About";
 import ManageTask from "../pages/Dashboard/ManageTask/ManageTask";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <About></About>,
+            },
+            {
+                path: "/dashboard/ManageUsers",
+                element: <ManageUsers></ManageUsers>,
             },
             {
                 path: "/dashboard/ManageTask",

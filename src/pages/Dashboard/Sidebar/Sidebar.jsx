@@ -1,9 +1,10 @@
 import { FaHome, FaTasks, FaUsers } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/microbucks_logo.png"
+import PropTypes from "prop-types";
 
 
-const Sidebar = () => {
+const Sidebar = ({ toggleSidebar }) => {
     return (
         <div>
             {/* Logo */}
@@ -14,7 +15,7 @@ const Sidebar = () => {
                 </p>
             </Link>
 
-            <ul className="menu p-4">
+            <ul className="menu p-4 gap-1" onClick={toggleSidebar}>
                 <li>
                     <NavLink to="/dashboard/adminHome">
                         <FaHome></FaHome>
@@ -22,7 +23,7 @@ const Sidebar = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/dashboard/adminHome">
+                    <NavLink to="/dashboard/ManageUsers">
                         <FaUsers></FaUsers>
                         Manage Users
                     </NavLink>
@@ -38,6 +39,10 @@ const Sidebar = () => {
             </ul>
         </div>
     );
+};
+
+Sidebar.propTypes = {
+    toggleSidebar: PropTypes.func.isRequired,
 };
 
 export default Sidebar;
