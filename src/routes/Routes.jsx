@@ -7,6 +7,7 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Dashboard from "../layouts/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import About from "../pages/About/About";
+import ManageTask from "../pages/Dashboard/ManageTask/ManageTask";
 
 const router = createBrowserRouter([
     {
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/dashboard",
-                element: <Home></Home>,
+                element: <About></About>,
+            },
+            {
+                path: "/dashboard/ManageTask",
+                element: <ManageTask></ManageTask>,
             },
         ]
     }
