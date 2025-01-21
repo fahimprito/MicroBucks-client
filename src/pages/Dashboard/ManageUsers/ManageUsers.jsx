@@ -1,18 +1,85 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users');
             return res.data;
         }
     })
-    
+
+    // Handle delete user
+    const handleDeleteUser = (user) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You want to delete ${user.name}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Deleted!", `${user.name} has been removed.`, "success");
+                axiosSecure.delete(`/users/${user._id}`)
+                    .then((res) => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: `${user.name} has been removed.`,
+                                icon: "success"
+                            });
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        Swal.fire("Error!", "Failed to delete the user.", "error");
+                    });
+            }
+        });
+    };
+
+    // Handle role change
+    const handleRoleChange = (userId, newRole, userName) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You want to change ${userName}'s role to ${newRole}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, change it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log(userId, newRole, userName);
+
+                axiosSecure.patch(`/users/${userId}`, { role: newRole })
+                    .then((res) => {
+                        if (res.data.modifiedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: `${userName}'s role updated to ${newRole}.`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        Swal.fire("Error!", "Failed to update user role.", "error");
+                    });
+            }
+        });
+    }
 
     return (
         <div className="min-h-[50vh] p-4">
@@ -21,7 +88,7 @@ const ManageUsers = () => {
                 <h2 className="text-3xl font-bold">Total Users: {users.length}</h2>
             </div>
             <div className="overflow-x-auto">
-                <table className="table table-zebra w-full">
+                <table className="table w-full">
                     {/* Table Head */}
                     <thead>
                         <tr>
@@ -59,6 +126,7 @@ const ManageUsers = () => {
                                     <select
                                         className="select select-bordered"
                                         value={user.role}
+                                        onChange={(e) => handleRoleChange(user._id, e.target.value, user.name)}
                                     >
                                         <option value="worker">Worker</option>
                                         <option value="buyer">Buyer</option>
@@ -67,9 +135,10 @@ const ManageUsers = () => {
                                 </td>
                                 <td>
                                     <button
-                                        className="btn btn-ghost btn-lg"
+                                        onClick={() => handleDeleteUser(user)}
+                                        className="btn btn-ghost btn-lg text-red-500"
                                     >
-                                        <FaTrashAlt className="text-red-600" />
+                                        <FaTrashAlt />
                                     </button>
                                 </td>
                             </tr>
