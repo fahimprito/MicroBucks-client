@@ -15,6 +15,7 @@ import BuyerRoute from "./BuyerRoute";
 import BuyerHome from "../pages/Dashboard/Homes/BuyerHome";
 import WorkerHome from "../pages/Dashboard/Homes/WorkerHome";
 import WorkerRoute from "./WorkerRoute";
+import DashboardHome from "../pages/Dashboard/Homes/DashboardHome";
 
 const router = createBrowserRouter([
     {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/dashboard",
-                element: <About></About>,
+                element: <DashboardHome></DashboardHome>,
             },
 
             // admin routes
