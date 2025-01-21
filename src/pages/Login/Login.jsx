@@ -41,6 +41,7 @@ const Login = () => {
                 const userInfo = {
                     email: result.user?.email,
                     name: result.user?.displayName,
+                    photoURL: result.user?.photoURL,
                     role: "worker",
                     coins: 10,
                 }
@@ -60,7 +61,7 @@ const Login = () => {
             <Helmet>
                 <title>MicroBucks | Login</title>
             </Helmet>
-            
+
             <div className="max-md:hidden">
                 <div className="mx-auto w-10/12">
                     <Lottie animationData={loginAnimation} loop={true} />

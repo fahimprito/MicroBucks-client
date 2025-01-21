@@ -32,6 +32,7 @@ const Register = () => {
                         const userInfo = {
                             name: data.name,
                             email: data.email,
+                            photoURL: photoURL,
                             role: data.role,
                             coins: data.role === "worker" ? 10 : 50,
                         }
@@ -66,8 +67,9 @@ const Register = () => {
             .then(result => {
                 console.log(result.user);
                 const userInfo = {
-                    email: result.user?.email,
                     name: result.user?.displayName,
+                    email: result.user?.email,
+                    photoURL: result.user?.photoURL,
                     role: "worker",
                     coins: 10,
                 }
