@@ -2,7 +2,7 @@
 
 const WorkerHome = () => {
     return (
-        <div>
+        <div className="min-h-[50vh]">
             WorkerHome
         </div>
     );

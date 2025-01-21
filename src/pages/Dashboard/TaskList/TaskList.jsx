@@ -1,11 +1,10 @@
 
-
-const BuyerHome = () => {
+const TaskList = () => {
     return (
         <div className="min-h-[50vh]">
-            BuyerHome
+            TaskList
         </div>
     );
 };
 
-export default BuyerHome;
+export default TaskList;

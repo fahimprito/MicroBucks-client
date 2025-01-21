@@ -17,6 +17,7 @@ import WorkerHome from "../pages/Dashboard/Homes/WorkerHome";
 import WorkerRoute from "./WorkerRoute";
 import DashboardHome from "../pages/Dashboard/Homes/DashboardHome";
 import DashboardError from "../components/ErrorPage/DashboardError";
+import TaskList from "../pages/Dashboard/TaskList/TaskList";
 
 const router = createBrowserRouter([
     {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/workerHome",
                 element: <WorkerRoute><WorkerHome></WorkerHome></WorkerRoute>,
+            },
+            {
+                path: "/dashboard/taskList",
+                element: <WorkerRoute><TaskList></TaskList></WorkerRoute>,
             },
 
         ]
