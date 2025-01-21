@@ -5,10 +5,12 @@ import { FaBars, FaCoins } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
 import Footer from "../components/Footer/Footer";
 import AuthContext from "../contexts/AuthContext";
+import useAuthUser from "../hooks/useAuthUser";
 
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { user } = useContext(AuthContext);
+    const { userData } = useAuthUser();
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -53,14 +55,14 @@ const Dashboard = () => {
                                     <FaCoins />
                                 </span>
                                 <p className="text-sm lg:text-base font-medium">
-                                    <span className="font-bold">100</span> Coins
+                                    <span className="font-bold">{userData?.coins}</span> Coins
                                 </p>
                             </div>
                             {/* Name */}
                             <div>
                                 <p className="text-sm lg:text-base font-medium">
-                                    <span className="font-bold">{user.displayName}</span>{" "}
-                                    <span className="text-gray-200">(Worker)</span>
+                                    <span className="font-bold">{user?.displayName}</span>{" "}
+                                    <span className="text-gray-200">({userData?.role})</span>
                                 </p>
                             </div>
                         </div>
@@ -68,18 +70,18 @@ const Dashboard = () => {
                         {/* User img */}
                         <div className="flex items-center gap-4">
                             <img
-                                src={user.photoURL}
+                                src={user?.photoURL}
                                 alt="User Profile"
                                 className="w-10 h-10 rounded-full border-2 border-white"
                             />
                         </div>
                         {/* Notifications */}
-                        <div className="relative text-2xl">
+                        <button className="relative text-2xl">
                             <IoNotifications />
                             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                                 3
                             </span>
-                        </div>
+                        </button>
                     </div>
                 </header>
 
