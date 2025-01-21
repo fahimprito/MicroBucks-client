@@ -16,6 +16,7 @@ import BuyerHome from "../pages/Dashboard/Homes/BuyerHome";
 import WorkerHome from "../pages/Dashboard/Homes/WorkerHome";
 import WorkerRoute from "./WorkerRoute";
 import DashboardHome from "../pages/Dashboard/Homes/DashboardHome";
+import DashboardError from "../components/ErrorPage/DashboardError";
 
 const router = createBrowserRouter([
     {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-        errorElement: <ErrorPage></ErrorPage>,
+        errorElement: <DashboardError></DashboardError>,
         children: [
             {
                 path: "/dashboard",
