@@ -2,7 +2,7 @@
 
 const AdminHome = () => {
     return (
-        <div>
+        <div className="min-h-[50vh]">
             AdminHome
         </div>
     );

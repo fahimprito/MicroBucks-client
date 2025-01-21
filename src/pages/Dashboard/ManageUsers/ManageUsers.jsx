@@ -116,7 +116,7 @@ const ManageUsers = () => {
                                         </div>
                                         <div>
                                             <div className="font-bold">{user.name}</div>
-                                            <div className="text-sm opacity-50">{user.role}</div>
+                                            <div className="text-sm opacity-50 capitalize">{user.role}</div>
                                         </div>
                                     </div>
                                 </td>

@@ -9,6 +9,12 @@ import PrivateRoute from "./PrivateRoute";
 import About from "../pages/About/About";
 import ManageTask from "../pages/Dashboard/ManageTask/ManageTask";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import AdminHome from "../pages/Dashboard/Homes/AdminHome";
+import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
+import BuyerHome from "../pages/Dashboard/Homes/BuyerHome";
+import WorkerHome from "../pages/Dashboard/Homes/WorkerHome";
+import WorkerRoute from "./WorkerRoute";
 
 const router = createBrowserRouter([
     {
@@ -43,14 +49,33 @@ const router = createBrowserRouter([
                 path: "/dashboard",
                 element: <About></About>,
             },
+
+            // admin routes
             {
-                path: "/dashboard/ManageUsers",
-                element: <ManageUsers></ManageUsers>,
+                path: "/dashboard/adminHome",
+                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
             },
             {
-                path: "/dashboard/ManageTask",
-                element: <ManageTask></ManageTask>,
+                path: "/dashboard/manageUsers",
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
             },
+            {
+                path: "/dashboard/manageTask",
+                element: <AdminRoute><ManageTask></ManageTask></AdminRoute>,
+            },
+
+            // buyer routes
+            {
+                path: "/dashboard/buyerHome",
+                element: <BuyerRoute><BuyerHome></BuyerHome></BuyerRoute>,
+            },
+            
+            // Worker routes
+            {
+                path: "/dashboard/workerHome",
+                element: <WorkerRoute><WorkerHome></WorkerHome></WorkerRoute>,
+            },
+
         ]
     }
 ]);

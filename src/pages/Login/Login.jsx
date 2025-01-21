@@ -26,7 +26,7 @@ const Login = () => {
         loginUser(email, password)
             .then(() => {
                 e.target.reset();
-                navigate(location.state ? location.state : '/');
+                navigate(location.state ? location.state : '/dashboard');
             })
             .catch(err => {
                 setError(err.message);
@@ -37,7 +37,7 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         loginWithGoogle()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 const userInfo = {
                     email: result.user?.email,
                     name: result.user?.displayName,
@@ -48,7 +48,7 @@ const Login = () => {
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         console.log(res.data);
-                        navigate(location.state ? location.state : '/');
+                        navigate(location.state ? location.state : '/dashboard');
                     })
             })
             .catch(error => {

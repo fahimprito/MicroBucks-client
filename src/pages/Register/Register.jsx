@@ -48,7 +48,7 @@ const Register = () => {
                                         showConfirmButton: false,
                                         timer: 1500
                                     });
-                                    navigate('/');
+                                    navigate('/dashboard');
                                 }
                             })
                     })
@@ -76,7 +76,7 @@ const Register = () => {
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         console.log(res.data);
-                        navigate('/');
+                        navigate('/dashboard');
                     })
             })
             .catch(error => {
