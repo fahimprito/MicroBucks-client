@@ -83,7 +83,7 @@ const ManageUsers = () => {
 
     return (
         <div className="min-h-[50vh] p-4">
-            <div className="flex justify-between my-4 items-center">
+            <div className="flex justify-around mb-10 items-center">
                 <h2 className="text-3xl font-bold">All Users</h2>
                 <h2 className="text-3xl font-bold">Total Users: {users.length}</h2>
             </div>
@@ -128,9 +128,9 @@ const ManageUsers = () => {
                                         value={user.role}
                                         onChange={(e) => handleRoleChange(user._id, e.target.value, user.name)}
                                     >
-                                        <option value="worker">Worker</option>
-                                        <option value="buyer">Buyer</option>
                                         <option value="admin">Admin</option>
+                                        <option value="buyer">Buyer</option>
+                                        <option value="worker">Worker</option>
                                     </select>
                                 </td>
                                 <td>
