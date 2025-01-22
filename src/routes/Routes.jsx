@@ -7,8 +7,8 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Dashboard from "../layouts/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import About from "../pages/About/About";
-import ManageTask from "../pages/Dashboard/ManageTask/ManageTask";
-import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import ManageTask from "../pages/Dashboard/Admin/ManageTask";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import AdminHome from "../pages/Dashboard/Homes/AdminHome";
 import AdminRoute from "./AdminRoute";
 import BuyerRoute from "./BuyerRoute";
@@ -17,7 +17,7 @@ import WorkerHome from "../pages/Dashboard/Homes/WorkerHome";
 import WorkerRoute from "./WorkerRoute";
 import DashboardHome from "../pages/Dashboard/Homes/DashboardHome";
 import DashboardError from "../components/ErrorPage/DashboardError";
-import TaskList from "../pages/Dashboard/TaskList/TaskList";
+import TaskList from "../pages/Dashboard/Worker/TaskList";
 
 const router = createBrowserRouter([
     {
