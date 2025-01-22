@@ -45,25 +45,25 @@ const Sidebar = ({ toggleSidebar }) => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/AddTask">
+                        <NavLink to="/dashboard/addTask">
                             <FaPlus />
                             Add New Tasks
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/MyTasks">
+                        <NavLink to="/dashboard/myTasks">
                             <FaListAlt />
                             My Task’s
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/PurchaseCoin">
+                        <NavLink to="/dashboard/purchaseCoin">
                             <FaWallet />
                             Purchase Coin
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/PaymentHistory">
+                        <NavLink to="/dashboard/paymentHistory">
                             <FaHistory />
                             Payment History
                         </NavLink>
@@ -80,19 +80,19 @@ const Sidebar = ({ toggleSidebar }) => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/TaskList">
+                        <NavLink to="/dashboard/taskList">
                             <FaTasks />
                             Task List
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/MySubmissions">
+                        <NavLink to="/dashboard/mySubmissions">
                             <FaListAlt />
                             My Submissions
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/Withdrawals">
+                        <NavLink to="/dashboard/withdrawals">
                             <FaWallet />
                             Withdrawals
                         </NavLink>
@@ -121,7 +121,7 @@ const Sidebar = ({ toggleSidebar }) => {
             {/* Navigation */}
             <ul className="menu p-4 gap-1" onClick={toggleSidebar}>
                 {getNavigationItems()}
-                
+
                 <div className="divider"></div>
                 <li onClick={logOutUser}>
                     <button>

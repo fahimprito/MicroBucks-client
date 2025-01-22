@@ -18,6 +18,10 @@ import WorkerRoute from "./WorkerRoute";
 import DashboardHome from "../pages/Dashboard/Homes/DashboardHome";
 import DashboardError from "../components/ErrorPage/DashboardError";
 import TaskList from "../pages/Dashboard/Worker/TaskList";
+import AddNewTasks from "../pages/Dashboard/Buyer/AddNewTasks";
+import MyTasks from "../pages/Dashboard/Buyer/MyTasks";
+import PurchaseCoin from "../pages/Dashboard/Buyer/PurchaseCoin";
+import PaymentHistory from "../pages/Dashboard/Buyer/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -71,6 +75,22 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/buyerHome",
                 element: <BuyerRoute><BuyerHome></BuyerHome></BuyerRoute>,
+            },
+            {
+                path: "/dashboard/addTask",
+                element: <BuyerRoute><AddNewTasks></AddNewTasks></BuyerRoute>,
+            },
+            {
+                path: "/dashboard/myTasks",
+                element: <BuyerRoute><MyTasks></MyTasks></BuyerRoute>,
+            },
+            {
+                path: "/dashboard/purchaseCoin",
+                element: <BuyerRoute><PurchaseCoin></PurchaseCoin></BuyerRoute>,
+            },
+            {
+                path: "/dashboard/paymentHistory",
+                element: <BuyerRoute><PaymentHistory></PaymentHistory></BuyerRoute>,
             },
             
             // Worker routes
