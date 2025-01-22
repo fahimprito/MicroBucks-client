@@ -58,7 +58,7 @@ const ManageUsers = () => {
             confirmButtonText: "Yes, change it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(userId, newRole, userName);
+                // console.log(userId, newRole, userName);
 
                 axiosSecure.patch(`/users/${userId}`, { role: newRole })
                     .then((res) => {
