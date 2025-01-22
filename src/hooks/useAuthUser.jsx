@@ -6,7 +6,7 @@ const useAuthUser = () => {
     const { user, loading } = useAuth()
     const axiosSecure = useAxiosSecure();
 
-    const { data: userData, isPending: authLoading } = useQuery({
+    const { data: userData, isPending: authLoading, refetch } = useQuery({
         queryKey: ["userData", user?.email],
         queryFn: async () => {
             if (!user?.email) return null; // no user, return null
@@ -16,7 +16,7 @@ const useAuthUser = () => {
         enabled: !!user?.email && !loading, // only fetch if the user is logged in
     });
 
-    return { userData, authLoading };
+    return { userData, authLoading, refetch };
 };
 
 export default useAuthUser;
