@@ -29,7 +29,7 @@ const AddNewTasks = () => {
                 showCancelButton: true,
                 cancelButtonColor: "#d33",
             }).then((result) => {
-                if (result.isConfirmed){
+                if (result.isConfirmed) {
                     navigate("/dashboard/purchaseCoin");
 
                 }
@@ -98,7 +98,7 @@ const AddNewTasks = () => {
                         {errors.task_title && <p className="text-red-500 ml-2">{errors.task_title.message}</p>}
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-4 items-end">
+                    <div className="grid sm:grid-cols-2 gap-4 ">
                         {/* Required Workers */}
                         <div>
                             <label className="block text-sm font-medium">Required Workers</label>
@@ -116,7 +116,7 @@ const AddNewTasks = () => {
 
                         {/* Payable Amount */}
                         <div>
-                            <label className="block text-sm font-medium">Payable Amount (per worker)</label>
+                            <label className="block text-sm font-medium">Amount (per worker)</label>
                             <input
                                 type="number"
                                 name="payable_amount"
@@ -177,13 +177,6 @@ const AddNewTasks = () => {
                             className="file-input file-input-bordered w-full"
                         />
                         {errors.task_image_url && <p className="text-red-500 ml-2">{errors.task_image_url.message}</p>}
-                        {/* <input
-                            type="text"
-                            name="task_image_url"
-                            {...register("task_image_url", { required: "Task image is required" })}
-                            className="input input-bordered w-full"
-                            required
-                        /> */}
                     </div>
 
 
