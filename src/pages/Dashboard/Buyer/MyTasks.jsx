@@ -2,19 +2,60 @@ import Swal from "sweetalert2";
 import useAuthUser from "../../../hooks/useAuthUser";
 import useTasks from "../../../hooks/useTasks";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 const MyTasks = () => {
     const { userData, refetch: refetchAuthUser } = useAuthUser();
     const axiosSecure = useAxiosSecure();
     const [tasks, loading, refetch] = useTasks(userData.email);
-    const navigate = useNavigate();
+    const [selectedTask, setSelectedTask] = useState(null);
 
+    // Update task 
     const handleUpdate = (task) => {
-        navigate(`/dashboard/update-task/${task._id}`, { state: { task } });
+        setSelectedTask(task); 
+        document.getElementById("update_modal").showModal(); // Open the modal
     };
 
+    const handleCloseModal = () => {
+        document.getElementById("update_modal").close();
+        setSelectedTask(null);
+    };
+
+    const handleUpdateSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const updatedTask = {
+            task_title: formData.get("task_title"),
+            task_detail: formData.get("task_detail"),
+            submission_info: formData.get("submission_info"),
+        };
+        // console.log(updatedTask);
+
+
+        await axiosSecure.patch(`/tasks/${selectedTask._id}`, updatedTask)
+            .then((res) => {
+                if (res.data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Task updated successfully.",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    handleCloseModal();
+                    refetch();
+                } else {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Failed to update the task.",
+                        icon: "error"
+                    });
+                }
+            });
+    };
+
+    // delete task 
     const handleDelete = async (task) => {
         const refillAmount = task.required_workers * task.payable_amount;
 
@@ -109,6 +150,57 @@ const MyTasks = () => {
                 </div>
             )}
 
+
+            {/* Update Modal */}
+            <dialog id="update_modal" className="modal">
+                {selectedTask && (
+                    <form onSubmit={handleUpdateSubmit} className="modal-box">
+                        <button
+                            type="button"
+                            className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4"
+                            onClick={handleCloseModal}
+                        >
+                            ✕
+                        </button>
+                        <h3 className="text-lg font-bold mb-4">Update task</h3>
+                        <div className="mb-4">
+                            <label className="label">Task Title</label>
+                            <input
+                                type="text"
+                                name="task_title"
+                                defaultValue={selectedTask?.task_title}
+                                className="input input-bordered w-full"
+                                required
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="label">Submission Info</label>
+                            <input
+                                type="text"
+                                name="submission_info"
+                                defaultValue={selectedTask?.submission_info}
+                                className="input input-bordered w-full"
+                                required
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="label">Task Detail</label>
+                            <textarea
+                                name="task_detail"
+                                defaultValue={selectedTask?.task_detail}
+                                className="textarea textarea-bordered w-full"
+                                rows="4"
+                                required
+                            ></textarea>
+                        </div>
+                        <button
+                            type="submit"
+                            className="btn btn-info text-white text-lg w-full">
+                            Update Task
+                        </button>
+                    </form>
+                )}
+            </dialog>
         </div>
     );
 };
