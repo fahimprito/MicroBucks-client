@@ -60,7 +60,7 @@ const Dashboard = () => {
                             </div>
                             {/* Name */}
                             <div>
-                                <p className="text-sm lg:text-base font-medium">
+                                <p className="text-sm lg:text-base font-medium capitalize">
                                     <span className="font-bold">{user?.displayName}</span>{" "}
                                     <span className="text-gray-200">({userData?.role})</span>
                                 </p>
@@ -72,7 +72,7 @@ const Dashboard = () => {
                             <img
                                 src={user?.photoURL}
                                 alt="User Profile"
-                                className="w-10 h-10 rounded-full border-2 border-white"
+                                className="w-10 h-10 object-cover rounded-full border-2 border-white"
                             />
                         </div>
                         {/* Notifications */}
@@ -88,8 +88,10 @@ const Dashboard = () => {
 
 
                 {/* Main Content Area */}
-                <main className="p-4 lg:p-8">
-                    <Outlet />
+                <main>
+                    <div className="p-4 lg:p-8">
+                        <Outlet />
+                    </div>
                     <Footer></Footer>
                 </main>
             </div>

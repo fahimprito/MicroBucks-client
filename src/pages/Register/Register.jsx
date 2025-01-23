@@ -10,6 +10,9 @@ import AuthContext from "../../contexts/AuthContext";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const Register = () => {
     const axiosPublic = useAxiosPublic();
     const [showPassword, setShowPassword] = useState(false);
@@ -18,47 +21,58 @@ const Register = () => {
     const { createUser, updateUserProfile, loginWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const onSubmit = data => {
+    const onSubmit = async (data) => {
         // console.log(data);
-        const { name, email, photoURL, password } = data;
+        const { name, email, password } = data;
 
-        // create user
-        createUser(email, password)
-            .then(() => {
-                // reset();
-                updateUserProfile({ displayName: name, photoURL: photoURL })
-                    .then(() => {
-                        // create user entry in the database
-                        const userInfo = {
-                            name: data.name,
-                            email: data.email,
-                            photoURL: photoURL,
-                            role: data.role,
-                            coins: data.role === "worker" ? 10 : 50,
-                        }
-                        axiosPublic.post('/users', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    console.log('user added to the database')
-                                    reset();
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'Registered successfully.',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    navigate('/dashboard');
-                                }
-                            })
-                    })
-                    .catch((err) => {
-                        setError(err.message);
-                    });
-            })
-            .catch(err => {
-                setError(err.message);
-            })
+        // Upload image to imageBB
+        const imageFile = { image: data.photoURL[0] }
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+
+        if (res.data.success) {
+            const profileImage = res.data.data.display_url;
+            // console.log(profileImage);
+            // create user
+            createUser(email, password)
+                .then(() => {
+                    updateUserProfile({ displayName: name, photoURL: profileImage })
+                        .then(() => {
+                            // create user entry in the database
+                            const userInfo = {
+                                name: data.name,
+                                email: data.email,
+                                photoURL: profileImage,
+                                role: data.role,
+                                coins: data.role === "worker" ? 10 : 50,
+                            }
+                            axiosPublic.post('/users', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        console.log('user added to the database')
+                                        reset();
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'success',
+                                            title: 'Registered successfully.',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                        navigate('/dashboard');
+                                    }
+                                })
+                        })
+                        .catch((err) => {
+                            setError(err.message);
+                        });
+                })
+                .catch(err => {
+                    setError(err.message);
+                })
+        }
 
     }
 
@@ -97,7 +111,12 @@ const Register = () => {
                     <div className="divider"></div>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="form-control mt-4">
+
+                        {/* User Role */}
+                        <div className="form-control mt-2">
+                            <label className="label">
+                                <span className="label-text font-semibold text-sm">User Role</span>
+                            </label>
                             <select
                                 defaultValue=""
                                 {...register("role", { required: true })}
@@ -110,27 +129,47 @@ const Register = () => {
                             {errors.role && <span className="text-red-600 ml-2">Please select a role</span>}
                         </div>
 
-
-                        <div className="form-control mt-4">
+                        {/* Name */}
+                        <div className="form-control mt-2">
+                            <label className="label">
+                                <span className="label-text font-semibold text-sm">Your Name</span>
+                            </label>
                             <input type="text" name="name" placeholder="Enter your name"
                                 {...register("name", { required: true })}
                                 className="input input-bordered rounded-md bg-base-100" />
                             {errors.name && <span className="text-red-600 ml-2">Name is required</span>}
                         </div>
-                        <div className="form-control mt-4">
-                            <input type="text" name="photoURL" placeholder="Photo URL"
-                                {...register("photoURL", { required: true })}
-                                className="input input-bordered rounded-md bg-base-100" />
-                            {errors.photoURL && <span className="text-red-600 ml-2">Photo URL is required</span>}
+
+                        {/* Photo  */}
+                        <div className="form-control mt-2">
+                            <label className="label">
+                                <span className="label-text font-semibold text-sm">Profile Image</span>
+                            </label>
+                            <input
+                                type="file"
+                                title="Choose your photo"
+                                {...register("photoURL", { required: "Profile image is required" })}
+                                className="file-input file-input-bordered w-full"
+                            />
+                            {errors.photoURL && <p className="text-red-500 ml-2">{errors.photoURL.message}</p>}
                         </div>
-                        <div className="form-control mt-4">
+
+                        {/* Email */}
+                        <div className="form-control mt-2">
+                            <label className="label">
+                                <span className="label-text font-semibold text-sm">Email</span>
+                            </label>
                             <input type="email" name="email" placeholder="Enter your email address"
                                 {...register("email", { required: true })}
                                 className="input input-bordered rounded-md bg-base-100" />
                             {errors.email && <span className="text-red-600 ml-2">Email is required</span>}
                         </div>
+
                         {/* Password */}
-                        <div className="form-control mt-4 relative">
+                        <div className="form-control mt-2 relative">
+                            <label className="label">
+                                <span className="label-text font-semibold text-sm">Password</span>
+                            </label>
                             <input
                                 type={showPassword ? "text" : "password"}
                                 {...register("password", {
@@ -154,7 +193,7 @@ const Register = () => {
                             <button
                                 onClick={() => setShowPassword(!showPassword)}
                                 type="button"
-                                className="btn btn-xs bg-transparent border-none hover:bg-transparent text-base absolute right-2 top-3 "
+                                className="btn btn-xs bg-transparent border-none hover:bg-transparent text-base absolute right-2 top-12 "
                             >
                                 {showPassword ? <FaEye /> : <FaEyeSlash />}
                             </button>
