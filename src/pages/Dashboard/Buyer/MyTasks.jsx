@@ -108,7 +108,7 @@ const MyTasks = () => {
                 <p className="text-center text-gray-500">No tasks found.</p>
             ) : (
                 <div className="overflow-x-auto">
-                    <table className="table table-lg w-full">
+                    <table className="table sm:table-lg w-full">
                         <thead>
                             <tr>
                                 <th>#</th>

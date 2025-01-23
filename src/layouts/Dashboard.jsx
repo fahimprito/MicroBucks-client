@@ -35,7 +35,7 @@ const Dashboard = () => {
             )}
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col bg-[#bcb08c23]">
+            <div className="grid grid-cols-1 bg-[#bcb08c23]">
                 {/* Header */}
                 <header className="bg-[#5fa796] text-white p-4 flex items-center justify-between lg:px-8">
                     <div>
