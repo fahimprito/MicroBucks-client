@@ -11,7 +11,7 @@ const Footer = () => {
                         {/* Logo */}
                         <Link className="flex items-center gap-1 mb-2">
                             <img className="w-10 sm:w-16" src={logo} alt="MicroBucks Logo" />
-                            <p className="text-3xl sm:text-5xl font-bold text-primary font-orbitron">
+                            <p className="text-2xl sm:text-3xl font-bold text-primary font-orbitron">
                                 Micro<span className="font-medium ">Bucks</span>
                             </p>
                         </Link>

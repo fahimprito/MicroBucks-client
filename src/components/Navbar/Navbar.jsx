@@ -122,11 +122,11 @@ const Navbar = () => {
     return (
         <nav className={`fixed top-0 w-full z-10 py-1 transition-colors duration-300 ${navbarBackground ? "bg-white shadow-lg" : "bg-transparent"
             }`}>
-            <div className="container mx-auto px-8 py-4 sm:py-2 flex justify-between items-center">
+            <div className="container mx-auto px-6 py-4 sm:py-2 flex justify-between items-center">
                 {/* Logo */}
                 <Link className="flex items-center gap-1">
                     <img className="w-10 sm:w-16" src={logo} alt="MicroBucks Logo" />
-                    <p className="text-3xl sm:text-5xl font-bold text-primary font-orbitron">
+                    <p className="text-2xl sm:text-5xl font-bold text-primary font-orbitron">
                         Micro<span className="font-medium ">Bucks</span>
                     </p>
                 </Link>

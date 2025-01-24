@@ -111,9 +111,9 @@ const Sidebar = ({ toggleSidebar }) => {
     return (
         <div>
             {/* Logo */}
-            <Link className="flex items-center gap-1 p-5">
+            <Link to={"/"} className="flex items-center gap-1 p-5">
                 <img className="w-10" src={logo} alt="MicroBucks Logo" />
-                <p className="text-3xl font-bold text-primary font-orbitron">
+                <p className="text-2xl font-bold text-primary font-orbitron">
                     Micro<span className="font-medium ">Bucks</span>
                 </p>
             </Link>
