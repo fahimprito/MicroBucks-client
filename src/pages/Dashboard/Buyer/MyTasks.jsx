@@ -106,7 +106,6 @@ const MyTasks = () => {
                 <h2 className="text-3xl font-bold">Total Tasks: {tasks.length}</h2>
             </div>
 
-            <h2 className="text-2xl font-bold mb-4">My Tasks</h2>
             {tasks.length === 0 ? (
                 <p className="text-center text-gray-500">No tasks found.</p>
             ) : (

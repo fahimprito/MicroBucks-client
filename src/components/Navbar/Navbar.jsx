@@ -78,7 +78,7 @@ const Navbar = () => {
                                     </label>
                                     <ul tabIndex={0} className="dropdown-content menu bg-base-200 rounded-box z-10 w-52 p-2 shadow space-y-2">
                                         <li><a className="text-black text-base">{user.displayName}</a></li>
-                                        <li><a className="text-black text-base">Available Coin: {userData.coins}<FaCoins /></a></li>
+                                        <li><a className="text-black text-base">Available Coin: {userData?.coins}<FaCoins /></a></li>
                                         <li><a
                                             onClick={logOutUser}
                                             className="btn btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-base px-5 border-none">Logout</a></li>
