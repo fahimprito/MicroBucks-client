@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion } from "motion/react"
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaCoins, FaTimes } from "react-icons/fa";
 import logo from "../../assets/microbucks_logo.png"
 import useAuth from "../../hooks/useAuth";
+import useAuthUser from "../../hooks/useAuthUser";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [navbarBackground, setNavbarBackground] = useState(false);
     const location = useLocation();
+    const { userData } = useAuthUser();
     const authData = useAuth();
     const { user, logOutUser } = authData;
 
@@ -70,19 +72,23 @@ const Navbar = () => {
                     <>
                         <li className="hidden lg:flex">
                             {
-                                user && <div className="relative group">
+                                user && <div className="dropdown dropdown-hover dropdown-end">
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar border mt-1">
                                         <img src={user.photoURL} alt="User Icon" className="rounded-full" />
                                     </label>
-                                    <span
-                                        className="absolute top-14 right-0 bg-white text-black px-3 py-1 rounded shadow-md text-sm hidden group-hover:block whitespace-nowrap z-10">
-                                        {user.displayName}
-                                    </span>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-200 rounded-box z-10 w-52 p-2 shadow space-y-2">
+                                        <li><a className="text-black text-base">{user.displayName}</a></li>
+                                        <li><a className="text-black text-base">Available Coin: {userData.coins}<FaCoins /></a></li>
+                                        <li><a
+                                            onClick={logOutUser}
+                                            className="btn btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-base px-5 border-none">Logout</a></li>
+                                    </ul>
                                 </div>
+
                             }
 
                         </li>
-                        <li>
+                        <li className="lg:hidden">
                             <button
                                 onClick={logOutUser}
                                 className="btn btn-sm bg-primary text-white hover:bg-[#0d775dd7] font-semibold text-base px-5 border-none">
