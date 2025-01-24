@@ -13,7 +13,7 @@ const MyTasks = () => {
 
     // Update task 
     const handleUpdate = (task) => {
-        setSelectedTask(task); 
+        setSelectedTask(task);
         document.getElementById("update_modal").showModal(); // Open the modal
     };
 
@@ -68,14 +68,17 @@ const MyTasks = () => {
             cancelButtonColor: '#d33',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                // Delete the task
-                await axiosSecure.delete(`/tasks/${task._id}`)
+                // Process the refund
+                await axiosSecure.patch('/refund-coins', {
+                    taskId: task._id,
+                    amount: refillAmount,
+                })
                     .then(async (res) => {
-                        if (res.data.deletedCount) {
-                            // Refund the coins
-                            await axiosSecure.patch('/refund-coins', { amount: refillAmount })
-                                .then((res) => {
-                                    if (res.data.modifiedCount > 0) {
+                        if (res.data.modifiedCount > 0) {
+                            // Delete the task
+                            await axiosSecure.delete(`/tasks/${task._id}`)
+                                .then((deleteRes) => {
+                                    if (deleteRes.data.deletedCount) {
                                         refetch();
                                         refetchAuthUser();
                                         Swal.fire({
