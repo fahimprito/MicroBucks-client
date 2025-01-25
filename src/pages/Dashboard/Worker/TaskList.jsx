@@ -40,7 +40,7 @@ const TaskList = () => {
                             <div>
                                 <button
                                     className="btn btn-sm px-2 bg-primary hover:bg-secondary text-white hover:text-black font-semibold text-base hover:underline underline-offset-2 decoration-2 decoration-black"
-                                    onClick={() => navigate(`/tasks/${task._id}`)}
+                                    onClick={() => navigate(`/dashboard/tasks/${task._id}`)}
                                 >
                                     View Details  <MdKeyboardDoubleArrowRight />
                                 </button>
