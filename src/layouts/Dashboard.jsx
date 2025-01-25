@@ -6,6 +6,7 @@ import { IoNotifications } from "react-icons/io5";
 import Footer from "../components/Footer/Footer";
 import AuthContext from "../contexts/AuthContext";
 import useAuthUser from "../hooks/useAuthUser";
+import { ImNotification } from "react-icons/im";
 
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -72,16 +73,28 @@ const Dashboard = () => {
                             <img
                                 src={user?.photoURL}
                                 alt="User Profile"
-                                className="w-10 h-10 object-cover rounded-full border-2 border-white"
+                                className="w-12 h-12 object-cover rounded-full border border-white"
                             />
                         </div>
                         {/* Notifications */}
-                        <button className="relative text-2xl">
-                            <IoNotifications />
-                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                                3
-                            </span>
-                        </button>
+                        <div className="dropdown dropdown-end">
+                            <label tabIndex={0} className="btn btn-ghost btn-sm btn-circle avatar border mt-1">
+                                <button className="relative text-2xl">
+                                    <IoNotifications />
+                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                                        3
+                                    </span>
+                                </button>
+                            </label>
+                            <ul tabIndex={0} className="dropdown-content menu bg-base-200 rounded-box z-10 w-60 p-2 shadow space-y-2">
+                                <li>
+                                    <a className="text-black text-base text-wrap">
+                                        <ImNotification />No Notifications
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
                     </div>
                 </header>
 
