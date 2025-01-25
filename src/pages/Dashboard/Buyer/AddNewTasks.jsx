@@ -58,6 +58,7 @@ const AddNewTasks = () => {
                 task_image_url: res.data.data.display_url,
                 totalPayableAmount,
                 buyer_email: userData.email,
+                buyer_name: userData.name,
                 published: new Date().toLocaleDateString("en-CA"),
             };
 

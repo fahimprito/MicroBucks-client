@@ -25,8 +25,8 @@ const TaskList = () => {
 
                         <div className="flex flex-col h-full gap-1 p-4">
                             <h3 className="text-xl font-bold mb-2">{task.task_title}</h3>
-                            <div className="text-gray-600">
-                                <strong>Buyer:</strong> {task.buyer_email}
+                            <div className="text-gray-600 flex justify-between">
+                                <strong>Buyer:</strong> <p>{task?.buyer_name}</p>
                             </div>
                             <div className="text-gray-600 flex justify-between">
                                 <strong>Completion Date:</strong> <p>{new Date(task.completion_date).toLocaleDateString()}</p>
@@ -40,7 +40,7 @@ const TaskList = () => {
                             <div>
                                 <button
                                     className="btn btn-sm px-2 bg-primary hover:bg-secondary text-white hover:text-black font-semibold text-base hover:underline underline-offset-2 decoration-2 decoration-black"
-                                onClick={() => navigate(`/tasks/${task._id}`)}
+                                    onClick={() => navigate(`/tasks/${task._id}`)}
                                 >
                                     View Details  <MdKeyboardDoubleArrowRight />
                                 </button>

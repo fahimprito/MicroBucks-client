@@ -127,7 +127,7 @@ const MyTasks = () => {
                                 <tr key={task._id}>
                                     <td>{index + 1}</td>
                                     <td className="max-w-40 font-bold">{task.task_title}</td>
-                                    <td className="max-w-40">{task.task_detail.slice(0, 60)}...</td>
+                                    <td className="overflow-hidden max-w-40">{task.task_detail.slice(0, 60)}...</td>
                                     <td>{task.required_workers}</td>
                                     <td>{task.payable_amount}</td>
                                     <td>{task.completion_date}</td>
