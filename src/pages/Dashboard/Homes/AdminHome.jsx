@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import AdminWithdrawRequests from "../Admin/AdminWithdrawRequests";
 
 const AdminHome = () => {
     const [stats, setStats] = useState({
@@ -50,7 +51,7 @@ const AdminHome = () => {
             </div>
 
             <div>
-
+                <AdminWithdrawRequests></AdminWithdrawRequests>
             </div>
         </div>
 
