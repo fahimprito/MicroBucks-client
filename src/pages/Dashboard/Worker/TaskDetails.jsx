@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuthUser from "../../../hooks/useAuthUser";
 import Swal from "sweetalert2";
@@ -14,6 +14,7 @@ const TaskDetails = () => {
     const axiosSecure = useAxiosSecure();
     const { userData } = useAuthUser();
     const [submissionDetails, setSubmissionDetails] = useState("");
+    const navigate = useNavigate();
 
     // Fetch task details
     useEffect(() => {
@@ -53,6 +54,7 @@ const TaskDetails = () => {
                         showConfirmButton: false,
                     });
                     setSubmissionDetails("");
+                    navigate(-1);
                 }
             })
             .catch((error) => {
