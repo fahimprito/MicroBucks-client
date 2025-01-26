@@ -43,19 +43,19 @@ const MySubmissions = () => {
                                         <td className="px-4 py-2 border border-gray-300">{index + 1}</td>
                                         <td className="border border-gray-300 p-2 max-w-72">{submission.task_title}</td>
                                         <td className="border border-gray-300 p-2">{submission.buyer_name}</td>
-                                        <td className="border border-gray-300 p-2">${submission.payable_amount}</td>
+                                        <td className="border border-gray-300 p-2">{submission.payable_amount}</td>
                                         <td className="border border-gray-300 p-2">
                                             {new Date(submission.current_date).toLocaleDateString()}
                                         </td>
                                         <td
-                                            className={`border border-gray-300 p-2 font-bold ${submission.status === "pending"
+                                            className={`border border-gray-300 p-2 font-bold capitalize ${submission.status === "pending"
                                                 ? "text-yellow-500"
                                                 : submission.status === "approved"
                                                     ? "text-green-500"
                                                     : "text-red-500"
                                                 }`}
                                         >
-                                            {submission.status.charAt(0).toUpperCase() + submission.status.slice(1)}
+                                            {submission.status}
                                         </td>
                                     </tr>
                                 ))}
