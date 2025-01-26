@@ -96,7 +96,7 @@ const MyTasks = () => {
     };
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <div className='flex justify-center min-h-[50vh]'><span className="loading loading-ring loading-lg"></span></div>;
     }
 
     return (

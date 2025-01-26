@@ -16,7 +16,7 @@ const WorkerRoute = ({ children }) => {
         return children;
     }
 
-    return <Navigate to="/" state={location?.pathname}></Navigate>
+    return <Navigate to={`${user ? "/dashboard" : "/"}`} state={location?.pathname}></Navigate>
     
 };
 

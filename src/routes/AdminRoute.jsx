@@ -17,8 +17,8 @@ const AdminRoute = ({ children }) => {
     }
 
 
-    return <Navigate to="/" state={location?.pathname}></Navigate>
-    
+    return <Navigate to={`${user ? "/dashboard" : "/"}`} state={location?.pathname}></Navigate>
+
 };
 
 AdminRoute.propTypes = {
