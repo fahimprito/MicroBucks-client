@@ -19,7 +19,7 @@ const Withdrawals = () => {
             worker_email: userData.email,
             worker_name: userData.name,
             withdrawal_coin: coinToWithdraw,
-            withdrawal_amount: dollarEquivalent,
+            withdrawal_amount: Number(dollarEquivalent),
             payment_system: paymentSystem,
             account_number: accountNumber,
             withdraw_date: new Date().toISOString(),
@@ -88,7 +88,7 @@ const Withdrawals = () => {
                         <div>
                             <label className="block text-sm font-medium mb-2">Withdrawal Amount (in $)</label>
                             <input
-                                type="text"
+                                type="number"
                                 value={dollarEquivalent || 0}
                                 className="input input-bordered w-full bg-gray-100"
                                 readOnly

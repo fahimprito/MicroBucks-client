@@ -16,7 +16,7 @@ const ApprovedSubmissions = () => {
 
     return (
         <div>
-            <h2 className="text-2xl sm:text-3xl text-center font-bold mb-10 mt-16">All Approved Submissions</h2>
+            <h2 className="text-2xl sm:text-3xl text-center font-bold mb-10 mt-16">All Approved Task Submissions</h2>
             {approvedSubmissions.length > 0 ? (
                 <div className="bg-white shadow-md mb-10">
                     <div className="overflow-x-auto">
