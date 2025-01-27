@@ -35,7 +35,7 @@ const WorkerStats = () => {
             <div className="stat">
                 <div className="stat-title text-xl font-semibold">Total Earnings</div>
                 <div className="stat-value text-purple-500">${stats.totalEarnings}</div>
-                <div className="stat-desc">Approved submissions</div>
+                <div className="stat-desc">Approved withdrawals</div>
             </div>
         </div>
     );

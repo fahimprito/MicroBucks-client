@@ -35,7 +35,7 @@ const BuyerStats = () => {
             <div className="stat">
                 <div className="stat-title text-xl font-semibold">Total Payments</div>
                 <div className="stat-value text-purple-500">${stats.totalPayments}</div>
-                <div className="stat-desc">Paid for tasks</div>
+                <div className="stat-desc">Paid for buy coin</div>
             </div>
         </div>
     );

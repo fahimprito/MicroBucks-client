@@ -25,6 +25,7 @@ import PaymentHistory from "../pages/Dashboard/Buyer/PaymentHistory";
 import MySubmissions from "../pages/Dashboard/Worker/MySubmissions";
 import Withdrawals from "../pages/Dashboard/Worker/Withdrawals";
 import TaskDetails from "../pages/Dashboard/Worker/TaskDetails";
+import PaymentPage from "../pages/Dashboard/Buyer/PaymentPage";
 
 const router = createBrowserRouter([
     {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/purchaseCoin",
                 element: <BuyerRoute><PurchaseCoin></PurchaseCoin></BuyerRoute>,
+            },
+            {
+                path: "/dashboard/purchase/:price/:coins",
+                element: <BuyerRoute><PaymentPage></PaymentPage></BuyerRoute>,
             },
             {
                 path: "/dashboard/paymentHistory",
