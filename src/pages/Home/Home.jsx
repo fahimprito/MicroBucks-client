@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import HeroSection from "./HeroSection";
+import BestWorkers from "./BestWorkers";
 
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
                 <title>MicroBucks | Home</title>
             </Helmet>
             <HeroSection></HeroSection>
+            <BestWorkers></BestWorkers>
             Home
         </div>
     );
