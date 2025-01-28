@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import ReactPaginate from "react-paginate";
 
 const MySubmissions = () => {
     const [submissions, setSubmissions] = useState([]);
     const [loading, setLoading] = useState(true);
     const axiosSecure = useAxiosSecure();
+
+    // Pagination states
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 10;
 
     useEffect(() => {
         const fetchSubmissions = async () => {
@@ -19,6 +24,11 @@ const MySubmissions = () => {
     if (loading) {
         return <div className='flex justify-center min-h-[50vh]'><span className="loading loading-ring loading-lg"></span></div>;
     }
+
+    // Pagination Logic
+    const offset = currentPage * itemsPerPage;
+    const currentItems = submissions.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(submissions.length / itemsPerPage);
 
     return (
         <div className="min-h-[50vh] my-6">
@@ -38,9 +48,9 @@ const MySubmissions = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {submissions.map((submission, index) => (
+                                {currentItems.map((submission, index) => (
                                     <tr key={submission._id} className="hover:bg-gray-100">
-                                        <td className="px-4 py-2 border border-gray-300">{index + 1}</td>
+                                        <td className="px-4 py-2 border border-gray-300">{offset + index + 1}</td>
                                         <td className="border border-gray-300 p-2 max-w-72">{submission.task_title}</td>
                                         <td className="border border-gray-300 p-2">{submission.buyer_name}</td>
                                         <td className="border border-gray-300 p-2">{submission.payable_amount}</td>
@@ -62,11 +72,30 @@ const MySubmissions = () => {
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             ) : (
                 <p className="text-center text-gray-500 ">No submissions found.</p>
             )}
 
+            {/* Pagination */}
+            <div className="flex justify-center mt-6">
+                <ReactPaginate
+                    previousLabel={"← Previous"}
+                    nextLabel={"Next →"}
+                    breakLabel={"..."}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={3}
+                    onPageChange={({ selected }) => setCurrentPage(selected)}
+                    containerClassName={"flex space-x-2"}
+                    pageClassName={"border rounded px-3 py-1 cursor-pointer"}
+                    activeClassName={"bg-primary text-white"}
+                    previousClassName={"border rounded px-3 py-1 cursor-pointer"}
+                    nextClassName={"border rounded px-3 py-1 cursor-pointer"}
+                    disabledClassName={"opacity-50 cursor-not-allowed"}
+                />
+            </div>
 
         </div>
     );
