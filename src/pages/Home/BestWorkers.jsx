@@ -30,7 +30,7 @@ const BestWorkers = () => {
     }
 
     return (
-        <section className="py-12 bg-gray-50">
+        <section className="py-12">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold text-center mb-8">Best Workers</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6">
