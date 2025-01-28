@@ -34,7 +34,7 @@ MicroBucks is a platform that connects users with small online tasks and allows 
 ## 🚀 Getting Started:
 1. Clone the repository:
    ```bash
-   https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-fahimprito
+   https://github.com/fahimprito/MicroBucks-client
 
 2. Install dependencies:
     ```bash
