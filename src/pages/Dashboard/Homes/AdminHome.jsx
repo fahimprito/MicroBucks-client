@@ -45,7 +45,7 @@ const AdminHome = () => {
                     <div className="stat">
                         <div className="stat-title text-xl font-semibold">Total Payments</div>
                         <div className="stat-value text-purple-500">${stats.totalPayments}</div>
-                        <div className="stat-desc">All-time</div>
+                        <div className="stat-desc">Total withdraw by worker</div>
                     </div>
                 </div>
             </div>
