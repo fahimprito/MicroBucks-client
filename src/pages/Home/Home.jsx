@@ -4,6 +4,7 @@ import BestWorkers from "./BestWorkers";
 import TestimonialSection from "./TestimonialSection";
 import ParallaxSection from "./ParallaxSection";
 import OurFeatures from "./OurFeatures";
+import EarnMore from "./EarnMore";
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
             <OurFeatures></OurFeatures>
             <ParallaxSection></ParallaxSection>
             <BestWorkers></BestWorkers>
+            <EarnMore></EarnMore>
             <TestimonialSection></TestimonialSection>
         </div>
     );
