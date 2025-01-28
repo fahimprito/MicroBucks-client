@@ -116,7 +116,7 @@ const Navbar = () => {
                 )
             }
             <li
-                onClick={() => window.open("https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-fahimprito", "_blank")}
+                onClick={() => window.open("https://github.com/fahimprito/MicroBucks-client", "_blank")}
                 className="btn btn-sm bg-accent hover:bg-[#d1c190] text-gray-800 text-base px-4 rounded-lg shadow-md border-none"
             >
                 Join as Developer
