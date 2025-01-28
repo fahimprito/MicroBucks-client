@@ -7,6 +7,7 @@ import Footer from "../components/Footer/Footer";
 import AuthContext from "../contexts/AuthContext";
 import useAuthUser from "../hooks/useAuthUser";
 import { ImNotification } from "react-icons/im";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -19,6 +20,9 @@ const Dashboard = () => {
 
     return (
         <div className="flex min-h-screen">
+            <Helmet>
+                <title>MicroBucks | Dashboard</title>
+            </Helmet>
             {/* Sidebar */}
             <div
                 className={`fixed z-50 inset-y-0 left-0 w-72 transform bg-[#bee3da] transition-transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -94,7 +98,7 @@ const Dashboard = () => {
                                 </li>
                             </ul>
                         </div>
-                        
+
                     </div>
                 </header>
 
