@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import HeroSection from "./HeroSection";
 import BestWorkers from "./BestWorkers";
+import TestimonialSection from "./TestimonialSection";
 
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
             </Helmet>
             <HeroSection></HeroSection>
             <BestWorkers></BestWorkers>
-            Home
+            <TestimonialSection></TestimonialSection>
         </div>
     );
 };

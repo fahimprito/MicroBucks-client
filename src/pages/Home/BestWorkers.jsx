@@ -37,7 +37,7 @@ const BestWorkers = () => {
                     {topWorkers.map((worker, index) => (
                         <div
                             key={index}
-                            className="bg-[#71c1ae31] shadow-lg rounded-lg overflow-hidden p-4 border border-gray-200 hover:shadow-xl transition"
+                            className="bg-[#71c1ae17] shadow-lg rounded-lg overflow-hidden p-4 border border-gray-200 hover:shadow-xl transition"
                         >
                             <img
                                 src={worker.photoURL}
