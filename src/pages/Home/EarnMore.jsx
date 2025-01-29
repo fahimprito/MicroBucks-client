@@ -9,8 +9,8 @@ const EarnMore = () => {
         <section className="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-8">
             {/* Left Side - Text Content */}
             <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
                 className="md:w-1/2 text-center md:text-left"
@@ -29,8 +29,8 @@ const EarnMore = () => {
             </motion.div>
 
             <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
                 className="md:w-1/2"
