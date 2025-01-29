@@ -1,8 +1,9 @@
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import PropTypes from "prop-types";
 
-const AdminWithdrawRequests = () => {
+const AdminWithdrawRequests = ({ refetch: adminStatsRefetch }) => {
     const axiosSecure = useAxiosSecure();
 
     const { data: withdrawals = [], isPending, refetch } = useQuery({
@@ -27,10 +28,11 @@ const AdminWithdrawRequests = () => {
                     await axiosSecure.patch(`/withdrawals/${id}/approve`)
                         .then(res => {
                             // console.log(res);
-                            
+
                             if (res.data.message === 'Withdrawal approved and payment information recorded') {
                                 Swal.fire("Approved!", "The withdrawal request has been approved.", "success");
                                 refetch();
+                                adminStatsRefetch();
                             }
                         }).catch(error => {
                             console.error(error);
@@ -95,6 +97,10 @@ const AdminWithdrawRequests = () => {
 
         </div>
     );
+};
+
+AdminWithdrawRequests.propTypes = {
+    refetch: PropTypes.func.isRequired,
 };
 
 export default AdminWithdrawRequests;
